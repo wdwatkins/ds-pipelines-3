@@ -1,0 +1,31 @@
+# install urbnmapr with remotes::install_github('UrbanInstitute/urbnmapr')
+packages:
+  - tidyverse
+  - dataRetrieval
+  - urbnmapr
+
+sources:
+  - 1_fetch/src/find_oldest_sites.R
+  - 3_visualize/src/map_sites.R
+
+targets:
+  all:
+    depends:
+      - 3_visualize/out/site_map.png
+
+  # Configuration
+  states:
+    command: c(I(c('WI','MN','MI')))
+  parameter:
+    command: c(I('00060'))
+
+  # Identify oldest sites
+  oldest_active_sites:
+    command: find_oldest_sites(states, parameter)
+
+  # PULL SITE DATA HERE
+
+
+  # Map oldest sites
+  3_visualize/out/site_map.png:
+    command: map_sites(oldest_active_sites, target_name)
