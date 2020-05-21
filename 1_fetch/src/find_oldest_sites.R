@@ -1,6 +1,6 @@
 # AS, MP, UM, and VI return errors
 find_oldest_site <- function(state, parameter) {
-  message(sprintf('Inventorying sites in %s that had observations between %s and %s', state, start_date, end_date))
+  message(sprintf('Inventorying sites in %s', state))
   sites <- dataRetrieval::whatNWISdata(
     parameterCd=parameter, stateCd=state, hasDataType='dv', agencyCd='USGS',
     siteType='ST', siteStatus='active',
