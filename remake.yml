@@ -1,3 +1,5 @@
+target_default: main
+
 # install urbnmapr with remotes::install_github('UrbanInstitute/urbnmapr')
 packages:
   - tidyverse
@@ -9,7 +11,7 @@ sources:
   - 3_visualize/src/map_sites.R
 
 targets:
-  all:
+  main:
     depends:
       - 3_visualize/out/site_map.png
 
