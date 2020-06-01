@@ -1,6 +1,5 @@
 target_default: main
 
-# install urbnmapr with remotes::install_github('UrbanInstitute/urbnmapr')
 packages:
   - tidyverse
   - dataRetrieval
