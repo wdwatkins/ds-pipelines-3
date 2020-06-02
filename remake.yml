@@ -4,6 +4,7 @@ packages:
   - tidyverse
   - dataRetrieval
   - urbnmapr
+  - cowplot
 
 sources:
   - 1_fetch/src/find_oldest_sites.R
