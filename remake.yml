@@ -4,6 +4,7 @@ packages:
   - tidyverse
   - dataRetrieval
   - urbnmapr
+  - rnaturalearth
   - cowplot
 
 sources:
@@ -25,7 +26,7 @@ targets:
   oldest_active_sites:
     command: find_oldest_sites(states, parameter)
 
-  # PULL SITE DATA HERE
+  # TODO: PULL SITE DATA HERE
 
 
   # Map oldest sites

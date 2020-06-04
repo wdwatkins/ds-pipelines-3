@@ -18,9 +18,9 @@ map_sites <- function(site_info, out_file) {
     scale_color_date(name='Begin Date', limit=age_limits, breaks=age_breaks, labels=age_labels)
 
   # plot the other states
-  world <- ne_countries(scale = "medium", returnclass = "sf")
   beyond_sites <- site_info %>% filter(state_cd %in% beyond_abbv)
   if(nrow(beyond_sites) > 0) {
+    world <- ne_countries(scale = "medium", returnclass = "sf")
     beyond <- ggplot(world) +
       geom_sf(fill = "lightgrey", color = "#ffffff", size = 0.25) +
       geom_point(data=beyond_sites, aes(y=dec_lat_va, x=dec_long_va, color=begin_date), group=NA) +

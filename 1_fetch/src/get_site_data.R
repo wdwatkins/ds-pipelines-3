@@ -2,7 +2,7 @@
 # packages needed: tidyverse, dataRetrieval
 get_site_data <- function(sites_info, state, parameter) {
   site_info <- filter(sites_info, state_cd == state)
-  message(sprintf('Retrieving data for site %s', site_info$site_no))
+  message(sprintf('  Retrieving data for %s-%s', site_info$state_cd, site_info$site_no))
 
   # simulate an unreliable web service or internet connection by causing random failures
   if(runif(1) < 0.5) {
