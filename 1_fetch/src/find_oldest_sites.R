@@ -1,4 +1,3 @@
-# AS, MP, UM, and VI return errors
 find_oldest_site <- function(state, parameter) {
   message(sprintf('  Inventorying sites in %s', state))
   sites <- dataRetrieval::whatNWISdata(
