@@ -1,4 +1,4 @@
-do_state_tasks <- function(oldest_active_sites, parameter, ...) {
+do_state_tasks <- function(oldest_active_sites, ...) {
 
   # Define task table rows
   task_names <- unique(oldest_active_sites$state_cd)
