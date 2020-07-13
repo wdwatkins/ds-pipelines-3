@@ -1,5 +1,8 @@
 do_state_tasks <- function(oldest_active_sites, ...) {
 
+  split_inventory(summary_file = '1_fetch/tmp/state_splits.yml',
+                  sites_info = oldest_active_sites)
+
   # Define task table rows
   task_names <- unique(oldest_active_sites$state_cd)
 
@@ -12,9 +15,9 @@ do_state_tasks <- function(oldest_active_sites, ...) {
     },
     # Make commands that call get_site_data()
     command = function(task_name, ...) {
-      sprintf("get_site_data(sites_info = oldest_active_sites,
-                    state = I('%s'),
-                    parameter = parameter)", task_name)
+      inventory_file <- sprintf('1_fetch/tmp/inventory_%s.tsv', task_name)
+      sprintf("get_site_data(sites_info_file = '%s',
+                    parameter = parameter)", inventory_file)
     }
   )
 
@@ -40,4 +43,18 @@ do_state_tasks <- function(oldest_active_sites, ...) {
 
   # Return nothing to the parent remake file
   return()
+}
+
+split_inventory <- function(summary_file='1_fetch/tmp/state_splits.yml',
+                            sites_info=oldest_active_sites) {
+  if(!dir.exists('1_fetch/tmp')) dir.create('1_fetch/tmp')
+  sites_info %>%
+    purrrlyr::by_row(function(x) {
+      readr::write_tsv(x = x, path = file.path('1_fetch/tmp',
+                                        paste0('inventory_', x$state_cd, ".tsv")))
+    })
+  inventories_sorted <- sites_info %>% pull(state_cd) %>%
+    sprintf('1_fetch/tmp/inventory_%s.tsv', .) %>%
+    sort()
+  sc_indicate(ind_file = summary_file, data_file = inventories_sorted)
 }
