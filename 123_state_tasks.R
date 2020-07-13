@@ -16,8 +16,9 @@ do_state_tasks <- function(oldest_active_sites, ...) {
     # Make commands that call get_site_data()
     command = function(task_name, ...) {
       inventory_file <- sprintf('1_fetch/tmp/inventory_%s.tsv', task_name)
-      sprintf("get_site_data(sites_info_file = '%s',
-                    parameter = parameter)", inventory_file)
+      psprintf("get_site_data(",
+               "sites_info_file = '%s'," = inventory_file,
+                "parameter = parameter)")
     }
   )
 
