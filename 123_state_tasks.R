@@ -22,11 +22,34 @@ do_state_tasks <- function(oldest_active_sites, ...) {
     }
   )
 
+  plot_step <- create_task_step(
+    step_name = 'plot',
+    target_name = function(task_name, ...) {
+      sprintf('3_visualize/out/timeseries_%s.png', task_name)
+    },
+    command = function(steps, ...) {
+      psprintf('plot_site_data(out_file = target_name,',
+                "site_data = %s," = steps[['download']]$target_name,
+                "parameter = parameter)")
+    }
+  )
+
+  tally_step <- create_task_step(
+    step_name = 'tally',
+    target_name = function(task_name, ...) {
+      sprintf("%s_tally", task_name)
+    },
+    command = function(steps, ...) {
+      sprintf("tally_site_obs(%s)", steps[['download']]$target_name)
+    }
+  )
+
+
   # Return test results to the parent remake file
   # Create the task plan
   task_plan <- create_task_plan(
     task_names = task_names,
-    task_steps = list(download_step),
+    task_steps = list(download_step, plot_step, tally_step),
     add_complete = FALSE)
 
   # Create the task remakefile
@@ -35,7 +58,7 @@ do_state_tasks <- function(oldest_active_sites, ...) {
     task_plan = task_plan,
     makefile = '123_state_tasks.yml',
     include = 'remake.yml',
-    sources = c("1_fetch/src/get_site_data.R"),
+    sources = c(...),
     packages = c("dataRetrieval", "tidyverse"),
     tickquote_combinee_objects = FALSE,
     finalize_funs = c())
