@@ -11,6 +11,7 @@ include:
 packages:
   - dataRetrieval
   - tidyverse
+  - lubridate
 
 sources:
   - 1_fetch/src/get_site_data.R
