@@ -8,7 +8,6 @@ packages:
   - cowplot
   - scipiper
   - purrrlyr
-  - lubridate
 
 sources:
   - 1_fetch/src/find_oldest_sites.R
