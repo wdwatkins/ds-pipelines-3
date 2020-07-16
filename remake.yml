@@ -24,7 +24,6 @@ targets:
   main:
     depends:
       - 3_visualize/out/site_map.png
-      - state_combiners
       - 3_visualize/out/data_coverage.png
       - 3_visualize/out/timeseries_map.html
 
