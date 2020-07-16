@@ -11,6 +11,7 @@ packages:
   - leaflet
   - leafpop
   - htmlwidgets
+  - remake
 
 sources:
   - 1_fetch/src/find_oldest_sites.R
